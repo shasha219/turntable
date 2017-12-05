@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<!--
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+-->
+<html>
+    <head>
+        <title>抽奖</title>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <script src="konva.min.js" type="text/javascript"></script>
+        <script src="turntable.js"></script>
+        <style>
+            body {
+                padding: 0;
+                margin: 0;
+                background-color: #f0f0f0;
+                overflow: hidden;
+            }
+        </style>
+    </head>
+    <body>
+        <div id="container">
+        </div>
+        <script>
+            var stage = new Konva.Stage({
+                container: "container",
+                width: window.innerWidth,
+                height: window.innerHeight,
+            })
+            var bglayer = new Konva.Layer();
+            stage.add(bglayer);
+            var turntable = new turntable({
+                x: stage.width() / 2,//画布大小
+                y: stage.height() / 3,
+                radius: 150,//转盘大小
+                back: "#e4370e",
+                data: ['1元红包', '2元红包', '3元红包', '4元红包'],//奖项
+                num: 3//设置中奖
+            })
+            var animateLayer = new Konva.Layer();
+            stage.add(animateLayer);
+            turntable.addToGroupOrLayer(bglayer);
+            bglayer.draw();
+            turntable.pointGroup.on("click",function(){
+               turntable.changeVal();
+            })
+        </script>
+    </body>
+</html>
